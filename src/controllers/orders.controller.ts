@@ -3,7 +3,7 @@ import { Controller, Get } from '@nestjs/common';
 @Controller('orders')
 export class OrdersController {
     @Get()
-    getOrders() {
-        return 'Orders works!!'
+    get() {
+        return { message: 'Orders works!!'}
     }
 }
