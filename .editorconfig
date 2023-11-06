@@ -1,3 +1,4 @@
+# Editor configuration, see https://editorconfig.org
 root = true
 
 [*]
@@ -11,5 +12,5 @@ trim_trailing_whitespace = true
 quote_type = single
 
 [*.md]
-max_line_lenght = off
+max_line_length = off
 trim_trailing_whitespace = false

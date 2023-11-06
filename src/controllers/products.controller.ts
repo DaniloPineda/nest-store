@@ -1,4 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
+import { ParseIntPipe } from 'src/common/parse-int/parse-int.pipe';
+import { CreateProductDto, UpdateProductDto } from 'src/dtos/product.dto';
 import { ProductsService } from 'src/services/products.service';
 
 @Controller('products')
@@ -15,22 +17,22 @@ export class ProductsController {
   }
 
   @Get(':id')
-  get(@Param('id') id: number) {
-    return this.producService.find(+id);
+  get(@Param('id', ParseIntPipe) id: number) {
+    return this.producService.find(id);
   }
 
   @Post()
-  create(@Body() payload: any) {
+  create(@Body() payload: CreateProductDto) {
     return this.producService.create(payload);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() payload: any){
-    return this.producService.update(+id, payload)
+  update(@Param('id', ParseIntPipe) id: number, @Body() payload: UpdateProductDto){
+    return this.producService.update(id, payload)
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return this.producService.delete(+id)
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.producService.delete(id)
   }
 }
