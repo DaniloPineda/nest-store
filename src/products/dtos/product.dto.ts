@@ -1,29 +1,36 @@
-import { PartialType } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsPositive, IsString, IsUrl, Max } from "class-validator";
+import { PartialType } from '@nestjs/swagger';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+  IsUrl,
+  Max,
+} from 'class-validator';
 
 export class CreateProductDto {
-    @IsString()
-    @IsNotEmpty()
-    readonly name: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly description: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly description: string;
 
-    @IsNumber()
-    @IsPositive()
-    @IsNotEmpty()
-    @Max(999)
-    readonly price: number;
+  @IsNumber()
+  @IsPositive()
+  @IsNotEmpty()
+  @Max(999)
+  readonly price: number;
 
-    @IsNumber()
-    @IsPositive()
-    @IsNotEmpty()
-    readonly stock: number;
+  @IsNumber()
+  @IsPositive()
+  @IsNotEmpty()
+  readonly stock: number;
 
-    @IsUrl()
-    @IsNotEmpty()
-    readonly image: string;
+  @IsUrl()
+  @IsNotEmpty()
+  readonly image: string;
 }
 
-export class UpdateProductDto extends PartialType(CreateProductDto) { }
+export class UpdateProductDto extends PartialType(CreateProductDto) {}

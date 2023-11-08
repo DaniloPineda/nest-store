@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { CustomersService } from '../services/customers.service';
@@ -7,11 +16,11 @@ import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 @ApiTags('Customers')
 @Controller('customers')
 export class CustomersController {
-    constructor(private customersService: CustomersService) {}
-    
+  constructor(private customersService: CustomersService) {}
+
   @Get()
-  getAll(){
-    return  this.customersService.findAll();
+  getAll() {
+    return this.customersService.findAll();
   }
 
   @Get(':id')
@@ -25,12 +34,15 @@ export class CustomersController {
   }
 
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() payload: UpdateCustomerDto){
-    return this.customersService.update(id, payload)
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: UpdateCustomerDto,
+  ) {
+    return this.customersService.update(id, payload);
   }
 
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
-    return this.customersService.delete(id)
+    return this.customersService.delete(id);
   }
 }

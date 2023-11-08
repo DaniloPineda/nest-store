@@ -22,24 +22,25 @@ import config from './config';
         API_KEY: Joi.string().required(),
         DB_NAME: Joi.string().required(),
         PORT: Joi.number().required(),
-      })
+      }),
     }),
-    HttpModule, 
-    UsersModule, 
-    ProductsModule, 
-    DatabaseModule],
+    HttpModule,
+    UsersModule,
+    ProductsModule,
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
     {
       provide: 'TASKS',
-      useFactory: async(http: HttpService) => {
+      useFactory: async (http: HttpService) => {
         const request = http.get('https://jsonplaceholder.typicode.com/todos');
         const tasks = await lastValueFrom(request);
         return tasks.data;
       },
-      inject: [HttpService]
-    }
+      inject: [HttpService],
+    },
   ],
 })
 export class AppModule {}

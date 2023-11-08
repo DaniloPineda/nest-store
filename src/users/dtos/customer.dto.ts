@@ -1,5 +1,5 @@
-import { PartialType } from "@nestjs/swagger";
-import { IsNotEmpty, IsPhoneNumber, IsString } from "class-validator";
+import { PartialType } from '@nestjs/swagger';
+import { IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
 
 export class CreateCustomerDto {
   @IsNotEmpty()
