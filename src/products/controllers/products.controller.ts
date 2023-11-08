@@ -1,8 +1,11 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+
 import { ParseIntPipe } from 'src/common/parse-int/parse-int.pipe';
 import { CreateProductDto, UpdateProductDto } from 'src/products/dtos/product.dto';
 import { ProductsService } from '../services/products.service';
 
+@ApiTags('Products')
 @Controller('products')
 export class ProductsController {
 
