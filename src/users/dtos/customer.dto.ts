@@ -1,5 +1,20 @@
 import { PartialType } from '@nestjs/swagger';
-import { IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsArray, IsIn, IsNotEmpty, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
+
+export class CreateFavoriteDto {
+
+  @IsNotEmpty()
+  @IsString() 
+  readonly name: string;
+  
+  @IsNotEmpty()
+  @IsString()
+  @IsIn(['small', 'medium', 'large'])
+  readonly size: string;
+ }
+
+ export class UpdateFavoriteDto extends PartialType(CreateFavoriteDto) {}
 
 export class CreateCustomerDto {
   @IsNotEmpty()
@@ -13,6 +28,17 @@ export class CreateCustomerDto {
   @IsNotEmpty()
   @IsPhoneNumber()
   readonly phone: string;
+
+  @IsNotEmpty()
+  @ValidateNested()
+  readonly favorite: CreateFavoriteDto;
+
+  @IsNotEmpty()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateFavoriteDto)
+  readonly favorites: CreateFavoriteDto[];
 }
 
 export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {}
+

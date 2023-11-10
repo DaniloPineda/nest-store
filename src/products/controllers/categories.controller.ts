@@ -12,6 +12,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/category.dto';
 import { CategoriesService } from '../services/categories.service';
+import { MongoIdPipe } from 'src/common/mongo-id/mongo-id.pipe';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -24,7 +25,7 @@ export class CategoriesController {
   }
 
   @Get(':id')
-  get(@Param('id', ParseIntPipe) id: number) {
+  get(@Param('id', MongoIdPipe) id: string) {
     return this.categoriesService.find(id);
   }
 
@@ -35,14 +36,14 @@ export class CategoriesController {
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', MongoIdPipe) id: string,
     @Body() payload: UpdateCategoryDto,
   ) {
     return this.categoriesService.update(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
+  delete(@Param('id', MongoIdPipe) id: string) {
     return this.categoriesService.delete(id);
   }
 }

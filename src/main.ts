@@ -9,6 +9,9 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true, // ignore unwanted properties
       forbidNonWhitelisted: true, //block unwanted properties
+      transformOptions: {
+        enableImplicitConversion: true
+      }
     }),
   );
 

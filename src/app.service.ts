@@ -1,10 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { Db } from 'mongodb';
 
 @Injectable()
 export class AppService {
-  constructor(@Inject('TASKS') private tasks: any[]) {}
+  constructor(@Inject('MONGO') private database: Db) {}
+  
+  get() {
+    return 'Hello World!!'
+  }
 
-  getHello(): any[] {
-    return this.tasks;
+  async getTasks() {
+    const tasksCollection = this.database.collection('tasks');
+    const tasks = await tasksCollection.find().toArray();
+    return tasks;
   }
 }

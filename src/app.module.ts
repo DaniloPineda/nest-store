@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { HttpModule, HttpService } from '@nestjs/axios';
+import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 
@@ -7,7 +7,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
-import { lastValueFrom } from 'rxjs';
 import { DatabaseModule } from './database/database.module';
 import { environment } from './environments';
 import config from './config';
@@ -30,17 +29,6 @@ import config from './config';
     DatabaseModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: 'TASKS',
-      useFactory: async (http: HttpService) => {
-        const request = http.get('https://jsonplaceholder.typicode.com/todos');
-        const tasks = await lastValueFrom(request);
-        return tasks.data;
-      },
-      inject: [HttpService],
-    },
-  ],
+  providers: [ AppService ],
 })
 export class AppModule {}
