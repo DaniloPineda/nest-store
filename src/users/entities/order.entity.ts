@@ -1,8 +1,16 @@
-import { Product } from "src/products/entities/product.entity";
-import { User } from "./user.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 export class Order {
-    date: Date;
-    user: User;
-    products: Product[];
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column({ type: 'date'})
+    date: string;
+
+    @Column({ type: 'integer'})
+    customerId: number;
+
+    // @Column({ type: })
+    // productIds: number[];
 }

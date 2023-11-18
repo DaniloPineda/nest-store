@@ -1,10 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  constructor(@Inject('TASKS') private tasks: any[]) {}
+  constructor() {}
 
-  getHello(): any[] {
-    return this.tasks;
+  getHello() {
+    return 'Hello World';
   }
+
 }
