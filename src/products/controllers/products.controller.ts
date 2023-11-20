@@ -38,4 +38,16 @@ export class ProductsController {
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.producService.delete(id)
   }
+
+  @Put(':id/category/:categoryId')
+  addProductCategory(@Param('id', ParseIntPipe) id: number, 
+  @Param('categoryId', ParseIntPipe) categoryId: number) {
+    return this.producService.addProductCategory(id, categoryId);
+  }
+
+  @Delete(':id/category/:categoryId')
+  removeProductCategory(@Param('id', ParseIntPipe) id: number, 
+  @Param('categoryId', ParseIntPipe) categoryId: number) {
+    return this.producService.removeProductCategory(id, categoryId);
+  }
 }

@@ -8,16 +8,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 	imports: [ 
 		TypeOrmModule.forRootAsync({
 			useFactory: (configService: ConfigType<typeof config>) => {
-				const {user, host, dbName, password, port } = configService.postgres;
-				// const {user, host, dbName, password, port } = configService.mysql;
+				// const {user, host, dbName, password, port } = configService.postgres;
+				const {user, host, dbName, password, port } = configService.mysql;
 				return {
-					type: 'postgres',
-					// type: 'mysql',
-					// synchronize: true,
-					// autoLoadEntities: true,
+					// type: 'postgres',
+					type: 'mysql',
+					synchronize: true,
+					autoLoadEntities: true,
 					host, port, username: user, database: dbName, password,
-					entities: ["entities/*.ts"],
-					migrations:[ "migrations/*.ts" ]
+					// entities: ["entities/*.ts"],
+					// migrations:[ "migrations/*.ts" ]
 				};
 			},
 			inject: [ config.KEY ]

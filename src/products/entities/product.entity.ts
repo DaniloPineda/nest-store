@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Brand } from "./brand.entity";
+import { Category } from "./category.entity";
 
 @Entity()
 export class Product {
@@ -19,4 +21,17 @@ export class Product {
 
     @Column({ type: 'varchar'})
     image: string;
+
+    @CreateDateColumn()
+    createdAt: Date;
+  
+    @UpdateDateColumn()
+    updatedAt: Date;
+
+    @ManyToOne(() => Brand, (brand) => brand.products)
+    brand: Brand;
+
+    @ManyToMany(() => Category, (cat) => cat.products)
+    @JoinTable()
+    categories: Category[];
 }

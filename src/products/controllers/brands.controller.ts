@@ -18,7 +18,7 @@ export class BrandsController {
   
     @Get(':id')
     get(@Param('id', ParseIntPipe) id: number) {
-      return this.brandsService.find(id);
+      return this.brandsService.find(id, true);
     }
   
     @Post()

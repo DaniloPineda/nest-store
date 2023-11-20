@@ -17,7 +17,7 @@ export class CategoriesService extends BaseService<Category> {
     }
 
     async find(id: number){
-        return await this.getByIdOrThrowNotFoundException({id});
+        return await this.getByIdOrThrowNotFoundException({ where: {id: id}, relations: ['products'] });
     }
 
     create(payload: CreateCategoryDto){
@@ -26,12 +26,12 @@ export class CategoriesService extends BaseService<Category> {
     }
 
     async update(id: number, payload: UpdateCategoryDto) {
-        const category = await this.getByIdOrThrowNotFoundException({id});
+        const category = await this.getByIdOrThrowNotFoundException({ where: {id: id} });
         return this.categoryRepo.merge(category, payload);
     }
 
     async delete(id: number) {
-        const category = this.getByIdOrThrowNotFoundException({id});
+        const category = this.getByIdOrThrowNotFoundException({ where: {id: id} });
         const deleted = (await this.categoryRepo.delete(id)).affected > 0;
         return { deleted, category };
     }

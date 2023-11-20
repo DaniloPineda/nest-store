@@ -1,7 +1,8 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { UsersService } from '../services/users.service';
+import { CreateUserDto } from '../dtos/user.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -21,5 +22,10 @@ export class UsersController {
     @Get(':id/orders')
     getOrders(@Param('id', ParseIntPipe) id: number) {
         return this.usersService.getOrdersByUser(id);
+    }
+
+    @Post()
+    create(@Body() payload: CreateUserDto) {
+        return this.usersService.create(payload);
     }
 }

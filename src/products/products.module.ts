@@ -4,7 +4,6 @@ import { CategoriesController } from './controllers/categories.controller';
 import { ProductsService } from './services/products.service';
 import { CategoriesService } from './services/categories.service';
 import { BrandsController } from './controllers/brands.controller';
-import { OrdersController } from './controllers/orders.controller';
 import { BrandsService } from './services/brands.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
@@ -17,13 +16,12 @@ import { Category } from './entities/category.entity';
       ProductsController,
       CategoriesController,
       BrandsController,
-      OrdersController
     ],
     providers: [
       ProductsService,
       CategoriesService,
       BrandsService,
     ],
-    exports:[ProductsService]
+    exports:[ProductsService, TypeOrmModule]
   })
 export class ProductsModule {}

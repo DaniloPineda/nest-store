@@ -16,7 +16,7 @@ export class CustomersService extends BaseService<Customer> {
     }
 
     async find(id: number) {
-        return await this.getByIdOrThrowNotFoundException({ id });
+        return await this.getByIdOrThrowNotFoundException({ where: {id: id} });
     }
 
     create(payload: CreateCustomerDto){
@@ -25,13 +25,13 @@ export class CustomersService extends BaseService<Customer> {
     }
 
     async update(id: number, payload: UpdateCustomerDto) {
-        const customer = await this.getByIdOrThrowNotFoundException({id});
+        const customer = await this.getByIdOrThrowNotFoundException({ where: {id: id} });
         this.customerRepo.merge(customer, payload);
         return this.customerRepo.save(customer);
     }
 
     async delete(id: number) {
-        const customer =  await this.getByIdOrThrowNotFoundException({id});
+        const customer =  await this.getByIdOrThrowNotFoundException({ where: {id: id} });
         const deleted = (await this.customerRepo.delete(id))?.affected > 0;
         return { deleted, customer };
     }

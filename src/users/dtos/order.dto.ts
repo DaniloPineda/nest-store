@@ -1,18 +1,11 @@
 import { PartialType } from "@nestjs/swagger";
-import { IsDate, IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsNumber, IsPositive } from "class-validator";
 
 export class CreateOrderDto {
-    @IsDate()
-    @IsNotEmpty()
-    readonly date: string;
-
     @IsNotEmpty()
     @IsNumber()
+    @IsPositive()
     readonly customerId: number;
-
-    // @IsNotEmpty()
-    // @IsArray()
-    // readonly productIds: number[];
 }
 
 export class UpdateOrderDto extends PartialType(CreateOrderDto) {}
