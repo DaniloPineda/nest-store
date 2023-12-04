@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProductDto, UpdateProductDto } from 'src/products/dtos/product.dto';
+import { CreateProductDto, FilterProductDto, UpdateProductDto } from 'src/products/dtos/product.dto';
 import { Product } from '../entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, Repository } from 'typeorm';
+import { Between, FindManyOptions, In, Repository } from 'typeorm';
 import { BaseService } from 'src/common/base.service';
 import { BrandsService } from './brands.service';
 import { Category } from '../entities/category.entity';
@@ -17,8 +17,16 @@ export class ProductsService extends BaseService<Product> {
     super(productRepo);
   }
 
-  findAll() {
-    return this.productRepo.find({ relations: ['brand']});
+  findAll(params?: FilterProductDto) {
+    let query: FindManyOptions<Product> = { relations: ['brand'] };
+    if(params) {
+      query.take = params.limit;
+      query.skip= params.offset;
+      if(params.minPrice && params.maxPrice) {
+        query.where = { price: Between(params.minPrice, params.maxPrice) }
+      }
+    }
+    return this.productRepo.find(query);
   }
 
   find(id: number) {

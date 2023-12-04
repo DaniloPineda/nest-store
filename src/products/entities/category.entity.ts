@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Product } from "./product.entity";
 
-@Entity()
+@Entity({ name: 'categories'})
 export class Category {
   @PrimaryGeneratedColumn()
   id: number;
@@ -9,10 +9,10 @@ export class Category {
   @Column({ type: 'varchar', length: 250, unique: true})
   name: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at'})
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at'})
   updatedAt: Date;
 
   @ManyToMany(() => Product, (prod) => prod.categories)

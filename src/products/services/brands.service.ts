@@ -17,7 +17,7 @@ export class BrandsService extends BaseService<Brand> {
     }
 
     async find(id: number, includeProds = false) {
-        const params = {relations: [includeProds ? 'products': ''], where: {id: id} };
+        const params = {relations: includeProds ? ['products'] : [], where: {id: id} };
         return await this.getByIdOrThrowNotFoundException(params);
     }
 

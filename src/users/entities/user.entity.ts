@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Customer } from "./customer.entity";
 
-@Entity()
+@Entity({ name: 'users'})
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -15,13 +15,13 @@ export class User {
   @Column({type: 'varchar', length: 100}) 
   role: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at'})
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at'})
   updatedAt: Date;
 
   @OneToOne(() => Customer, (customer) => customer.user, { nullable: true })
-  @JoinColumn()
+  @JoinColumn({ name: 'customer_id'})
   customer: Customer;
 }

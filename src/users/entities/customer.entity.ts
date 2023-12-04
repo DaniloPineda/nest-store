@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGenerated
 import { User } from "./user.entity";
 import { Order } from "./order.entity";
 
-@Entity()
+@Entity({ name: 'customers'})
 export class Customer {
   @PrimaryGeneratedColumn()
   id: number;
@@ -16,10 +16,10 @@ export class Customer {
   @Column({type: 'varchar', length: 255})
   phone: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at'})
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at'})
   updatedAt: Date;
 
   @OneToOne(() => User, (user) => user.customer)
