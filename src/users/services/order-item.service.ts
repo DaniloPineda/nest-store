@@ -8,18 +8,17 @@ import { Product } from 'src/products/entities/product.entity';
 
 @Injectable()
 export class OrderItemService {
-    constructor(
-        @InjectRepository(OrderItem) private orderItemRepo: Repository<OrderItem>,
-        @InjectRepository(Order) private orderRepo: Repository<Order>,
-        @InjectRepository(Product) private productRepo: Repository<Product>
-    ) {}
+  constructor(
+    @InjectRepository(OrderItem) private orderItemRepo: Repository<OrderItem>,
+    @InjectRepository(Order) private orderRepo: Repository<Order>,
+    @InjectRepository(Product) private productRepo: Repository<Product>,
+  ) {}
 
-
-    async create(payload: CreateOrderItemDto) {
-        const item = new OrderItem();
-        item.order = await this.orderRepo.findOneBy({ id: payload.orderId });
-        item.product = await this.productRepo.findOneBy({ id: payload.productId });
-        item.quantity = payload.quantity;
-        return this.orderItemRepo.save(item);
-    }
+  async create(payload: CreateOrderItemDto) {
+    const item = new OrderItem();
+    item.order = await this.orderRepo.findOneBy({ id: payload.orderId });
+    item.product = await this.productRepo.findOneBy({ id: payload.productId });
+    item.quantity = payload.quantity;
+    return this.orderItemRepo.save(item);
+  }
 }

@@ -31,13 +31,14 @@ import config from './config';
         MYSQL_ROOT_PASSWORD: Joi.string().required(),
         MYSQL_HOST: Joi.string().required(),
         MYSQL_PORT: Joi.number().required(),
-      })
+      }),
     }),
-    HttpModule, 
-    UsersModule, 
-    ProductsModule, 
-    DatabaseModule],
+    HttpModule,
+    UsersModule,
+    ProductsModule,
+    DatabaseModule,
+  ],
   controllers: [AppController],
-  providers: [ AppService ],
+  providers: [AppService],
 })
 export class AppModule {}

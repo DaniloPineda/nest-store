@@ -6,11 +6,10 @@ import { OrderItemService } from '../services/order-item.service';
 @ApiTags('Order Items')
 @Controller('order-item')
 export class OrderItemController {
-    constructor(private orderItemService: OrderItemService) {}
-    
-    
-    @Post()
-    addOrderItem(@Body() payload: CreateOrderItemDto) {
-        return this.orderItemService.create(payload);
-    }
+  constructor(private orderItemService: OrderItemService) {}
+
+  @Post()
+  addOrderItem(@Body() payload: CreateOrderItemDto) {
+    return this.orderItemService.create(payload);
+  }
 }

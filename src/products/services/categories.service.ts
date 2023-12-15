@@ -7,32 +7,40 @@ import { BaseService } from 'src/common/base.service';
 
 @Injectable()
 export class CategoriesService extends BaseService<Category> {
-    
-    constructor(@InjectRepository(Category) private categoryRepo: Repository<Category>) {
-        super(categoryRepo)
-    }
+  constructor(
+    @InjectRepository(Category) private categoryRepo: Repository<Category>,
+  ) {
+    super(categoryRepo);
+  }
 
-    findAll() {
-        return this.categoryRepo.find();
-    }
+  findAll() {
+    return this.categoryRepo.find();
+  }
 
-    async find(id: number){
-        return await this.getByIdOrThrowNotFoundException({ where: {id: id}, relations: ['products'] });
-    }
+  async find(id: number) {
+    return await this.getByIdOrThrowNotFoundException({
+      where: { id: id },
+      relations: ['products'],
+    });
+  }
 
-    create(payload: CreateCategoryDto){
-        const category = this.categoryRepo.create(payload);
-        return this.categoryRepo.save(category);
-    }
+  create(payload: CreateCategoryDto) {
+    const category = this.categoryRepo.create(payload);
+    return this.categoryRepo.save(category);
+  }
 
-    async update(id: number, payload: UpdateCategoryDto) {
-        const category = await this.getByIdOrThrowNotFoundException({ where: {id: id} });
-        return this.categoryRepo.merge(category, payload);
-    }
+  async update(id: number, payload: UpdateCategoryDto) {
+    const category = await this.getByIdOrThrowNotFoundException({
+      where: { id: id },
+    });
+    return this.categoryRepo.merge(category, payload);
+  }
 
-    async delete(id: number) {
-        const category = this.getByIdOrThrowNotFoundException({ where: {id: id} });
-        const deleted = (await this.categoryRepo.delete(id)).affected > 0;
-        return { deleted, category };
-    }
+  async delete(id: number) {
+    const category = this.getByIdOrThrowNotFoundException({
+      where: { id: id },
+    });
+    const deleted = (await this.categoryRepo.delete(id)).affected > 0;
+    return { deleted, category };
+  }
 }
